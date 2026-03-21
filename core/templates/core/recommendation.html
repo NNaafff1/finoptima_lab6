@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="mb-4">🤖 Финансовая рекомендация</h1>
+
+<div class="card bg-light">
+    <div class="card-body">
+        <h5 class="card-title">Анализ ваших финансов:</h5>
+        <p class="card-text fs-5">{{ advice }}</p>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="{% url 'dashboard' %}" class="btn btn-primary">Вернуться на главную</a>
+</div>
+{% endblock %}

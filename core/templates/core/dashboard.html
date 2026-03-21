@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="mb-4">📊 Финансовая панель</h1>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card card-balance">
+            <div class="card-body">
+                <h5 class="card-title">💵 Баланс</h5>
+                <h2>{{ balance }} ₽</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-income">
+            <div class="card-body">
+                <h5 class="card-title">📈 Доходы</h5>
+                <h2>{{ income }} ₽</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-expense">
+            <div class="card-body">
+                <h5 class="card-title">📉 Расходы</h5>
+                <h2>{{ expense }} ₽</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>➕ Добавить транзакцию</h5>
+            </div>
+            <div class="card-body">
+                <a href="{% url 'add_transaction' %}" class="btn btn-primary">Добавить операцию</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>🤖 Получить рекомендацию</h5>
+            </div>
+            <div class="card-body">
+                <a href="{% url 'get_recommendation' %}" class="btn btn-success">Анализировать финансы</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if recent_transactions %}
+<div class="mt-4">
+    <h3>📋 Последние транзакции</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Категория</th>
+                <th>Сумма</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in recent_transactions %}
+            <tr>
+                <td>{{ transaction.date }}</td>
+                <td>{{ transaction.category.name }}</td>
+                <td>{{ transaction.amount }} ₽</td>
+                <td>{{ transaction.description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}
